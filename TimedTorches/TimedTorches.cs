@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace TimedTorches
 {
-    [BepInPlugin("gurrlin.TimedTorches", "Timed Torches", "0.5.1")]
+    [BepInPlugin("kculotta.TimedTorches", "Timed Torches", "0.5.2")]
     [BepInProcess("valheim.exe")]
     public class ValheimMod : BaseUnityPlugin
     {
-        private readonly Harmony harmony = new Harmony("gurrlin.TimedTorches");
+        private readonly Harmony harmony = new Harmony("kculotta.TimedTorches");
 
         private static ConfigEntry<int> _configNexusID;
         private static ConfigEntry<bool> _configEnabled;
@@ -125,12 +125,13 @@ namespace TimedTorches
             {
                 if(affectedSources.Contains(Utils.GetPrefabName(__instance.gameObject)))
                 {
-                    // Should never burn if under water
-                    float waterLevel = WaterVolume.GetWaterLevel(___m_enabledObject.transform.position);
-                    if(___m_enabledObject.transform.position.y < waterLevel)
-                    {
-                        return;
-                    }
+                    // KPC - removed this check after breaking in H&H update
+		    // Should never burn if under water
+                    //float waterLevel = WaterVolume.GetWaterLevel(___m_enabledObject.transform.position);
+                    //if(___m_enabledObject.transform.position.y < waterLevel)
+                    //{
+                    //    return;
+                    //}
 
                     // Calculate if the torch should currently be lit
                     bool shouldBeLit = false;
